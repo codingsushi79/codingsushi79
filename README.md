@@ -2,7 +2,7 @@
 
 - 📫 How to reach me **sashabaranov@sushii.dev**
 
-- 👨‍💻 All of my projects are available at **[https://sushii.dev](https://sushii.dev)**
+- 👨‍💻 All of my projects are available at **[sushii.dev](https://sushii.dev)**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
