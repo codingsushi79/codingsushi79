@@ -1,5 +1,3 @@
-<h3 align="left">GitHub Metrics:</h3>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="github-metrics.svg" />
   <source media="(prefers-color-scheme: light)" srcset="github-metrics.svg" />
