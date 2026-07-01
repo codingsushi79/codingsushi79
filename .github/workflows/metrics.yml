@@ -1,4 +1,5 @@
-# Generates GitHub profile metrics with https://github.com/lowlighter/metrics
+# Uses gh-metrics fork until lowlighter/metrics fixes Projects (classic) deprecation in achievements.
+# See: https://github.com/lowlighter/metrics/issues/1706
 # Requires a repository secret named METRICS_TOKEN (GitHub personal access token, no scopes required).
 # Star the topics you want displayed at https://github.com/stars?filter=topics
 
@@ -17,7 +18,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: lowlighter/metrics@latest
+      - uses: gh-metrics/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics.svg
@@ -33,7 +34,7 @@ jobs:
           plugin_achievements: yes
           plugin_achievements_display: detailed
 
-      - uses: lowlighter/metrics@latest
+      - uses: gh-metrics/metrics@master
         if: ${{ success() || failure() }}
         with:
           token: ${{ secrets.METRICS_TOKEN }}
