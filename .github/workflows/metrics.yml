@@ -1,0 +1,46 @@
+# Generates GitHub profile metrics with https://github.com/lowlighter/metrics
+# Requires a repository secret named METRICS_TOKEN (GitHub personal access token, no scopes required).
+# Star the topics you want displayed at https://github.com/stars?filter=topics
+
+name: Metrics
+on:
+  schedule: [{cron: "0 0 * * *"}]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/metrics.yml
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          filename: github-metrics.svg
+          base: header, activity, community
+          base_indepth: yes
+          config_order: base.header, isocalendar, topics, achievements
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+          plugin_topics: yes
+          plugin_topics_mode: icons
+          plugin_topics_sort: starred
+          plugin_topics_limit: 21
+          plugin_achievements: yes
+          plugin_achievements_display: detailed
+
+      - uses: lowlighter/metrics@latest
+        if: ${{ success() || failure() }}
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          filename: github-metrics-xkcd.svg
+          base: ""
+          plugin_screenshot: yes
+          plugin_screenshot_title: XKCD of the day
+          plugin_screenshot_url: https://xkcd.com
+          plugin_screenshot_selector: "#comic img"
+          plugin_screenshot_viewport: '{"width": 600, "height": 600}'
